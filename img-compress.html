@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MyPDF - Optimize your images for perfect comprehension at any level. Enhance readability and adjust image quality based on your needs.">
+    <meta name="keywords" content="image optimization, PDF tools, image compression, comprehension tool, MyPDF">
+    <meta name="author" content="MyPDF">
+    <meta property="og:title" content="MyPDF - Image Comprehension Tool">
+    <meta property="og:description" content="Optimize your images for perfect comprehension at any level">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mypdf.com">
+    <meta property="og:image" content="https://mypdf.com/logo.png">
+    
+    <title>MyPDF - Image Comprehension Tool</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --royal-white: #f8f8f8;
+            --royal-green: #1a5a3a;
+            --royal-gold: #d4af37;
+            --royal-black: #222222;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--royal-black);
+            background-color: var(--royal-white);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--royal-green);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--royal-gold);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: white;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover {
+            color: var(--royal-gold);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--royal-gold);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 3rem 0;
+        }
+        
+        .tool-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tool-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .tool-header h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--royal-green);
+            margin-bottom: 0.5rem;
+        }
+        
+        .tool-header p {
+            color: #666;
+        }
+        
+        /* Tool Controls */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .control-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--royal-green);
+        }
+        
+        .control-group select, 
+        .control-group input[type="range"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: var(--royal-white);
+        }
+        
+        .control-group select:focus, 
+        .control-group input[type="range"]:focus {
+            outline: none;
+            border-color: var(--royal-gold);
+        }
+        
+        /* Image Preview Area */
+        .image-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .image-preview {
+            flex: 1;
+            min-width: 300px;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            background-color: var(--royal-white);
+        }
+        
+        .image-preview img {
+            max-width: 100%;
+            max-height: 400px;
+            display: none;
+            margin: 0 auto;
+        }
+        
+        .upload-btn {
+            display: inline-block;
+            background-color: var(--royal-green);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+        
+        .upload-btn:hover {
+            background-color: #13462d;
+            transform: translateY(-2px);
+        }
+        
+        /* Ad Spaces */
+        .ad-space {
+            background-color: #f0f0f0;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 8px;
+            margin: 2rem 0;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed #ccc;
+        }
+        
+        .ad-space p {
+            color: #666;
+            margin: 0;
+        }
+        
+        /* Results Section */
+        .results {
+            margin-top: 2rem;
+        }
+        
+        .result-metrics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .metric-card {
+            flex: 1;
+            min-width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .metric-card h3 {
+            color: var(--royal-green);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-card p {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--royal-black);
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background-color: var(--royal-gold);
+            color: var(--royal-black);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 1rem;
+            text-decoration: none;
+        }
+        
+        .download-btn:hover {
+            background-color: #c9a227;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--royal-black);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            color: var(--royal-gold);
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--royal-gold);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #444;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">My<span>PDF</span></a>
+            <button class="mobile-menu-btn">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Optimize Images for Perfect Comprehension</h1>
+            <p>Enhance your images for any comprehension level with MyPDF's intelligent optimization technology. Perfect for educators, content creators, and professionals.</p>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Top Ad Space -->
+            <div class="ad-space">
+                <!-- Google AdSense Ad Code -->
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"></script>
+                <!-- Replace YOUR_AD_UNIT_ID with your actual Ad Unit ID -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                     data-ad-slot="YOUR_AD_UNIT_ID"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+            
+            <!-- Tool Container -->
+            <div class="tool-container">
+                <div class="tool-header">
+                    <h2>Image Comprehension Tool</h2>
+                    <p>Upload your image and adjust the comprehension level to optimize it for your needs</p>
+                </div>
+                
+                <!-- Controls -->
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="comprehension-level">Comprehension Level</label>
+                        <select id="comprehension-level">
+                            <option value="basic">Basic (Low Detail)</option>
+                            <option value="standard" selected>Standard (Balanced)</option>
+                            <option value="advanced">Advanced (High Detail)</option>
+                            <option value="expert">Expert (Maximum Detail)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="image-quality">Image Quality</label>
+                        <input type="range" id="image-quality" min="1" max="100" value="80">
+                        <span id="quality-value">80%</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="output-format">Output Format</label>
+                        <select id="output-format">
+                            <option value="jpeg">JPEG</option>
+                            <option value="png">PNG</option>
+                            <option value="webp">WebP</option>
+                            <option value="pdf">PDF</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Image Area -->
+                <div class="image-area">
+                    <div class="image-preview">
+                        <p>Upload an image to get started</p>
+                        <img id="original-image" src="#" alt="Original Image">
+                        <input type="file" id="image-upload" accept="image/*" style="display: none;">
+                        <button class="upload-btn" onclick="document.getElementById('image-upload').click()">Upload Image</button>
+                    </div>
+                    
+                    <div class="image-preview">
+                        <p>Optimized image will appear here</p>
+                        <img id="optimized-image" src="#" alt="Optimized Image">
+                        <button id="download-btn" class="download-btn" style="display: none;">Download Optimized Image</button>
+                    </div>
+                </div>
+                
+                <!-- Middle Ad Space -->
+                <div class="ad-space">
+                    <!-- Google AdSense Ad Code -->
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"></script>
+                    <!-- Replace YOUR_AD_UNIT_ID with your actual Ad Unit ID -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                         data-ad-slot="YOUR_AD_UNIT_ID"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                
+                <!-- Results Section -->
+                <div class="results">
+                    <h3>Optimization Results</h3>
+                    <div class="result-metrics">
+                        <div class="metric-card">
+                            <h3>Original Size</h3>
+                            <p id="original-size">0 KB</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Optimized Size</h3>
+                            <p id="optimized-size">0 KB</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Reduction</h3>
+                            <p id="reduction">0%</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Estimated Load Time</h3>
+                            <p id="load-time">0 ms</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Ad Space -->
+            <div class="ad-space">
+                <!-- Google AdSense Ad Code -->
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"></script>
+                <!-- Replace YOUR_AD_UNIT_ID with your actual Ad Unit ID -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+                     data-ad-slot="YOUR_AD_UNIT_ID"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MyPDF</h3>
+                    <p>Enhancing image comprehension through intelligent optimization technology.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 MyPDF. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // DOM Elements
+        const imageUpload = document.getElementById('image-upload');
+        const originalImage = document.getElementById('original-image');
+        const optimizedImage = document.getElementById('optimized-image');
+        const downloadBtn = document.getElementById('download-btn');
+        const comprehensionLevel = document.getElementById('comprehension-level');
+        const imageQuality = document.getElementById('image-quality');
+        const qualityValue = document.getElementById('quality-value');
+        const outputFormat = document.getElementById('output-format');
+        const originalSize = document.getElementById('original-size');
+        const optimizedSize = document.getElementById('optimized-size');
+        const reduction = document.getElementById('reduction');
+        const loadTime = document.getElementById('load-time');
+        
+        // Event Listeners
+        imageUpload.addEventListener('change', handleImageUpload);
+        comprehensionLevel.addEventListener('change', updateOptimization);
+        imageQuality.addEventListener('input', updateQualityValue);
+        imageQuality.addEventListener('change', updateOptimization);
+        outputFormat.addEventListener('change', updateOptimization);
+        downloadBtn.addEventListener('click', downloadOptimizedImage);
+        
+        // Update quality value display
+        function updateQualityValue() {
+            qualityValue.textContent = `${imageQuality.value}%`;
+        }
+        
+        // Handle image upload
+        function handleImageUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                originalImage.src = event.target.result;
+                originalImage.style.display = 'block';
+                
+                // Display original file size
+                originalSize.textContent = `${(file.size / 1024).toFixed(2)} KB`;
+                
+                // Process the image
+                updateOptimization();
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Update optimized image
+        function updateOptimization() {
+            if (!originalImage.src || originalImage.src === '#') return;
+            
+            // Simulate optimization (in a real app, this would be more complex)
+            optimizedImage.src = originalImage.src;
+            optimizedImage.style.display = 'block';
+            downloadBtn.style.display = 'inline-block';
+            
+            // Simulate optimization results
+            const originalSizeValue = parseFloat(originalSize.textContent);
+            const qualityFactor = imageQuality.value / 100;
+            const compressionFactor = getCompressionFactor();
+            
+            const optimizedSizeValue = originalSizeValue * qualityFactor * compressionFactor;
+            optimizedSize.textContent = `${optimizedSizeValue.toFixed(2)} KB`;
+            
+            const reductionValue = ((originalSizeValue - optimizedSizeValue) / originalSizeValue * 100).toFixed(2);
+            reduction.textContent = `${reductionValue}%`;
+            
+            // Simulate load time based on size
+            loadTime.textContent = `${Math.max(50, Math.round(optimizedSizeValue * 0.5))} ms`;
+        }
+        
+        // Get compression factor based on comprehension level
+        function getCompressionFactor() {
+            switch(comprehensionLevel.value) {
+                case 'basic': return 0.4;
+                case 'standard': return 0.6;
+                case 'advanced': return 0.8;
+                case 'expert': return 0.95;
+                default: return 0.7;
+            }
+        }
+        
+        // Download optimized image
+        function downloadOptimizedImage() {
+            if (!optimizedImage.src || optimizedImage.src === '#') return;
+            
+            const link = document.createElement('a');
+            link.href = optimizedImage.src;
+            link.download = `optimized-image.${outputFormat.value}`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // Initialize
+        updateQualityValue();
+    </script>
+</body>
+</html>
